@@ -1,0 +1,85 @@
+.hp {
+  display: block;
+  padding: 20px;
+}
+.hp-logo {
+  margin: 0 auto;
+  margin-top: 72px;
+  @media screen and (min-width: 700px) {
+    margin: 20px auto;
+  }
+}
+.hp-h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+  color: #6a5ae0;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 120%;
+}
+.hp-p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 100;
+  font-size: 12px;
+  color: black;
+  margin: 17px auto;
+  width: fit-content;
+}
+
+.hp-featurecard {
+  background-color: white;
+  width: 80%;
+  text-align: center;
+  border-radius: 0px 0px 20px 20px;
+  margin: 64px auto;
+  @media screen and (min-width: 700px) {
+    width: 400px;
+    
+  }
+}
+
+.hp-featurecard-h2 {
+  font-family: 'Monteserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  color: white;
+  margin: 0 auto;
+}
+.hp-featurecard-box {
+  padding: 19px;
+  position: relative;
+  top: -40px;
+  background-color: #53a6a4;
+  width: fit-content;
+}
+.hp-featurecard-p {
+  text-align: center;
+  margin: 0 auto 20px auto;
+  padding: 0 10px;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+}
+.hp-imgbox {
+  background-color: #53a6a4;
+  border-radius: 20px;
+}
+.hp-img {
+  margin: 0 auto;
+  padding: 78px 50px;
+}
+.hp-button{
+    padding: 20px;
+    margin: 0 auto;
+    width: 70vw;
+    background-color: #6a5ae0;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 20px;
+    @media screen and (min-width: 700px) {
+        width: 700px;
+      }
+}
+

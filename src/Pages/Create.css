@@ -1,0 +1,12 @@
+.cp-imgBox{
+ width: 100px;
+ height: 100px;
+ background-color: black;
+ border-radius: 100px;
+}
+.cp-imgBox-img{
+   object-fit: cover;
+   width: 100%;
+   height: 100%;
+   border-radius: 12px;
+}
