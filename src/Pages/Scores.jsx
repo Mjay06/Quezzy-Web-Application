@@ -31,6 +31,14 @@ export default function Scores() {
             Title={'General Knowledge'}
             description={'This quiz has already been created'}
           />
+          <Explore
+            Title={'General Knowledge'}
+            description={'This quiz has already been created'}
+          />
+          <Explore
+            Title={'General Knowledge'}
+            description={'This quiz has already been created'}
+          />
         </div>
         <secion></secion>
       </div>
@@ -40,6 +48,7 @@ export default function Scores() {
     return (
       <div>
        { data.QuizData.map(quiz => <QuizQuestion A={quiz.A} B={quiz.B} C={quiz.C} D={quiz.D} Answer={quiz.CorrectAnswer} Question={quiz.Question} type="correction"  /> ) }
+       <p onClick={()=>{setdata("")}} className='underline'>Back</p>
       </div>
     )
 }
