@@ -1,5 +1,7 @@
 import React from 'react'
 import { DeleteQuestion } from '../Apis/QuizApi'
+import { deleteQuiz } from '../QueryFetches/useQuiz'
+import { useQueryClient } from '@tanstack/react-query'
 
 export default function QuizQuestion({
   No,
@@ -10,8 +12,14 @@ export default function QuizQuestion({
   Answer,
   Question,
   id,
-  type,
+  type = undefined,
 }) {
+  const queryClient = useQueryClient()
+
+  function invalidatequery(){
+    queryClient.invalidateQueries(['questions', id])
+  }
+  const mutation = deleteQuiz(invalidatequery)
   return (
     <div className="place-items-center p-4 bg-white my-3">
       <div>
@@ -27,10 +35,10 @@ export default function QuizQuestion({
         </ul>
         <p>Answer: {Answer}</p>
         <div className="flex gap-2 justify-end font-bold">
-          {!type === 'correction' && (
+          {type || (
             <span
-              onClick={() => DeleteQuestion(id)}
-              className="text-xs text-red-500"
+              onClick={() => mutation.mutate(id)}
+              className="text-xs text-red-500 cursor-pointer"
             >
               Delete
             </span>

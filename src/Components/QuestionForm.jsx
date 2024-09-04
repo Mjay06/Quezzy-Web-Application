@@ -1,9 +1,15 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { EditQuizData, SendQuizQuestion } from '../QueryFetches/useQuiz'
+import { useQueryClient } from '@tanstack/react-query'
 
 export default function QuestionForm({ setForm, id }) {
-  const mutation = SendQuizQuestion(setForm, id)
+  const queryClient = useQueryClient()
+  function invalidatequery() {
+    queryClient.invalidateQueries(['questions', id])
+  }
+  const mutation = SendQuizQuestion(setForm, invalidatequery)
+
   const {
     register,
     handleSubmit,
@@ -72,8 +78,9 @@ export default function QuestionForm({ setForm, id }) {
           </select>
         </div>
         <input
+          disabled= {mutation.isLoading}
           type="submit"
-          value={'Add'}
+          value={!mutation.isLoading ? 'Add' : 'Loading'}
           className="w-full mx-auto text-center p-4 bg-purple font-Lato font-semibold text-base rounded-lg text-white"
         />
       </div>

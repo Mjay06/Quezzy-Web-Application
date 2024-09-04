@@ -1,9 +1,11 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { EditQuizData } from '../QueryFetches/useQuiz'
+import { useQueryClient } from '@tanstack/react-query'
 
 export default function ({ setForm }) {
-  const mutation = EditQuizData(setForm)
+  const queryClient = useQueryClient()
+  const mutation = EditQuizData(setForm, queryClient)
   const {
     register,
     handleSubmit,

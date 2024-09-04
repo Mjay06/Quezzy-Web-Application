@@ -48,6 +48,16 @@ export async function GetQuestion(Id) {
 export async function DeleteQuestion(id) {
   const { error } = await supabase.from('Questions').delete().eq('id', id)
 }
+export async function DeleteQuizWithQUestions(id) {
+  const { error: quizError } = await supabase
+    .from('Quizzes')
+    .delete()
+    .eq('id', id)
+  const { error: QuestionError } = await supabase
+    .from('Questions')
+    .delete()
+    .eq('quizId', id)
+}
 
 export async function SearchQuiz(quizCode) {
   let { data: Quizzes, error } = await supabase

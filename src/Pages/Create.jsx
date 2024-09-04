@@ -4,9 +4,12 @@ import QuizCard from '../Components/QuizCard'
 import QuizForm from '../Components/QuizForm'
 import { useQuizData } from '../QueryFetches/useQuiz'
 import { Link } from 'react-router-dom'
+import { DeleteQuizWithQUestions } from '../Apis/QuizApi'
+import { useQueryClient } from '@tanstack/react-query'
 
 export default function Create() {
   //for form
+  const queryClient = useQueryClient()
   const [form, setShowform] = useState(false)
 
   //to get the quiz data
@@ -38,6 +41,7 @@ export default function Create() {
               ppq={quiz.ppq}
               quizImg={quiz.quizImg}
               key={quiz.Title}
+              id= {quiz.id}
             />
             </Link>
           ))

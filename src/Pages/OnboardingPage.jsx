@@ -19,7 +19,7 @@ export default function OnboardingPage() {
         </div>
       </div>
       <Link to="/app">
-        <button className="hp-button">Get Started</button>
+        <button className="hp-button text-center flex justify-center"> SIgn In With Google</button>
       </Link>
     </div>
   )

@@ -1,5 +1,17 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { GetQuiz, SearchQuiz, SendQuestion, SendQuiz } from '../Apis/QuizApi'
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
+import {
+  DeleteQuestion,
+  DeleteQuizWithQUestions,
+  GetQuiz,
+  SearchQuiz,
+  SendQuestion,
+  SendQuiz,
+} from '../Apis/QuizApi'
 
 export function useQuizData() {
   const { data, status, error } = useQuery({
@@ -26,22 +38,48 @@ export function getQuizDescription(dispatch, navigate, state) {
   return mutation
 }
 
-export function EditQuizData(setForm) {
+export function EditQuizData(setForm, queryClient) {
   const mutation = useMutation({
     mutationFn: SendQuiz,
-    onSuccess: async () => {
+    onSuccess: async (data) => {
+      queryClient.invalidateQueries(['QuizData'])
+      setForm(false)
+      console.log(data)
+      return data
+    },
+  })
+  return mutation
+}
+
+export function SendQuizQuestion(setForm, invalidatequery) {
+  const mutation = useMutation({
+    mutationFn: SendQuestion,
+    onSuccess: () => {
+      invalidatequery()
+      console.log('ran')
       setForm(false)
     },
   })
   return mutation
 }
 
-export function SendQuizQuestion(setForm) {
+export function deleteQuiz(invalidatequery) {
   const mutation = useMutation({
-    mutationFn: SendQuestion,
-    onSuccess: async () => {
-      setForm(false)
+    mutationFn: DeleteQuestion,
+    onSuccess: () => {
+      invalidatequery()
     },
   })
+
+  return mutation
+}
+export function deleteQuizQuestion(queryClient) {
+  const mutation = useMutation({
+    mutationFn: DeleteQuizWithQUestions,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['QuizData'])
+    },
+  })
+
   return mutation
 }

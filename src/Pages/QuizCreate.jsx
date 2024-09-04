@@ -15,6 +15,9 @@ export default function QuizCreate() {
   const { data, error, isLoading } = useQuery({
     queryKey: ['questions', id],
     queryFn: () => GetQuestion(Number(id)),
+    onSuccess: (data) =>{
+      console.log("dataLoaded")
+    }
   })
 
   if (isLoading === true) return <div>Loading...</div>
