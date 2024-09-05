@@ -83,3 +83,12 @@ export function deleteQuizQuestion(queryClient) {
 
   return mutation
 }
+
+export function useSearchQuiz(quizcode, enabled) {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['takeQuiz', quizcode],
+    queryFn: () => SearchQuiz(quizcode),
+    enabled: enabled,
+  })
+  return { data, isLoading, error }
+}

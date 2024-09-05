@@ -4,28 +4,31 @@ import { Navigate, replace, useNavigate } from 'react-router-dom'
 import { SearchQuiz } from '../Apis/QuizApi'
 import { takeQuizQuestion } from '../Contexts/QuizContext'
 import React, { useEffect, useRef, useState } from 'react'
-import { getQuizDescription } from '../QueryFetches/useQuiz'
+import { getQuizDescription, useSearchQuiz } from '../QueryFetches/useQuiz'
 
 export default function Explore({ Title, description, image, type, to }) {
   const navigate = useNavigate()
   const [code, setCode] = useState('')
+  const [enabled, setEnabled] = useState(false)
   const { state, dispatch } = takeQuizQuestion()
-  const firstRender = useRef(true);//track the first render
-  useEffect(()=>{
-    if(firstRender.current){
-      firstRender.current = false// skip the first render
-      return;
+  const { data, isLoading, error } = useSearchQuiz(code, enabled)
+
+  useEffect(() => {
+    console.log(data)
+    dispatch({ type: 'setQuizDescription', payload: data })
+    if (data) {
+      navigate(`/app/quiz`, { replace: true })
+      setEnabled(false)
     }
-  console.log("ran")
-  },[state.QuizDescription])
+  }, [data])
 
   async function TakeQuiz() {
-    console.log(code)
-    console.log('before hook')
-    const data = await SearchQuiz(code)
-    dispatch({ type: 'setQuizDescription', payload: data })
-    navigate(`/app/quiz`, { replace: true })
-    
+    //console.log(code)
+    //console.log('before hook')
+    //const data = await SearchQuiz(code)
+    setEnabled(true)
+
+    //
   }
 
   return (
@@ -55,7 +58,7 @@ export default function Explore({ Title, description, image, type, to }) {
             onClick={TakeQuiz}
             className="w-full mt-4  focus:ring-0  focus:outline-purple-700 px-3 py-3 font-semibold text-white rounded-md bg-purple mx-auto"
           >
-            Take Quiz
+            {!isLoading ? 'Take Quiz' : 'Loading Quiz'}
           </button>
         </>
       )}

@@ -2,6 +2,7 @@ import React from 'react'
 import { deleteQuizQuestion } from '../QueryFetches/useQuiz'
 import { useQueryClient } from '@tanstack/react-query'
 import { DeleteQuizWithQUestions } from '../Apis/QuizApi'
+import { useNavigate } from 'react-router-dom'
 
 export default function QuizCard({
   Title,
@@ -13,7 +14,8 @@ export default function QuizCard({
   id,
 }) {
   const queryClient = useQueryClient()
-  const mutation = DeleteQuizWithQUestions(queryClient)
+  const mutation = deleteQuizQuestion(queryClient)
+  const navigate = useNavigate()
   return (
     <div className="flex gap-3 place-items-center p-3 bg-white rounded-lg my-3 justify-between">
       <div className="flex place-items-center gap-4">
@@ -31,13 +33,18 @@ export default function QuizCard({
           </ul>
         </div>
       </div>
-      <img
-        onClick={() => {
-          mutation.mutate(id)
-        }}
-        className="w-5"
-        src="/src/assets/delete.svg"
-      />
+      <div className='flex flex-col place-items-center gap-3'>
+        { mutation.isLoading === true ? <p className='text-xs text-red-600'> Deleting.. </p>: <img
+          onClick={() => {
+            mutation.mutate(id)
+          }}
+          className="w-5"
+          src="/src/assets/delete.svg"
+        />}
+        <p onClick={()=>{
+           navigate(`${Title}/${id}`)
+        }} className='font-Lato  text-xs underline text-purple'>Add Questions &rarr;</p>
+      </div>
     </div>
   )
 }

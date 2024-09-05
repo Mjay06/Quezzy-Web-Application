@@ -4,6 +4,7 @@ import { GetQuestion, GetQuizQuestion } from '../Apis/QuizApi'
 import QuizQuestionCard from './QuizQuestionCard'
 import { takeQuizQuestion } from '../Contexts/QuizContext'
 import QuizFinished from './QuizFinished'
+import Timer from  './Timer'
 
 export default function QuizInfo({ Time, Title, Description, ppq, Id }) {
   const [name, setName] = useState(null)
@@ -17,6 +18,7 @@ export default function QuizInfo({ Time, Title, Description, ppq, Id }) {
   })
   const prevExcept = number === 0
   const nextExcept = number + 1 === data?.length
+  
   function OnSubmit() {
     if (name) {
       setQuestion(true)
@@ -79,7 +81,7 @@ export default function QuizInfo({ Time, Title, Description, ppq, Id }) {
             Question {number + 1}
           </h1>
           <p>
-            <b>{Time}:00</b>
+            15:00
           </p>
         </div>
         <QuizQuestionCard

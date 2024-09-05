@@ -33,7 +33,7 @@ export default function Create() {
       )}
       {status === 'success' && data.Quizzes.length >= 1
         ? data.Quizzes.map((quiz) => (
-           <Link to={`${quiz.Title}/${quiz.id}`} > <QuizCard
+            <QuizCard
               Title={quiz.Title}
               Description={quiz.Description}
               Code={quiz.Code}
@@ -41,9 +41,8 @@ export default function Create() {
               ppq={quiz.ppq}
               quizImg={quiz.quizImg}
               key={quiz.Title}
-              id= {quiz.id}
+              id={quiz.id}
             />
-            </Link>
           ))
         : ''}
 

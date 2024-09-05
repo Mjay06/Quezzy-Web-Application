@@ -53,6 +53,10 @@ function reducer(state, action) {
         ...state,
         No: state.No - 1,
       }
+    case 'TimesUp':
+      return{
+        ...state
+      }
     case 'Submit':
       const result = {
         ...state,
