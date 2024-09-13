@@ -6,22 +6,25 @@ const Timer = ({ start, startMinutes, onSubmit }) => {
 
   useEffect(() => {
       let interval = null
+
+    
     if (start) {
       interval = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds - 1)
       }, 1000)
-    } else if (!start && seconds !== 0) {
+    }
+    if (seconds === 0){
+      clearInterval(interval)
+      setSeconds(0)
+      onSubmit()
+    }
+    else if (!start && seconds !== 0) {
       clearInterval(interval)
     }
     return () => clearInterval(interval)
-  }, [start, seconds])
+  }, [start, seconds, onSubmit])
 
-  useEffect(() => {
-    if (seconds === 0) {
-      clearInterval(interval)
-      onSubmit()
-    }
-  }, [seconds, onSubmit])
+
 
   const formatTime = (totalSeconds) => {
     const minutes = Math.floor(totalSeconds / 60)

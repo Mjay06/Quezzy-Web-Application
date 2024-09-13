@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 
-export default function QuizFinished({ dispatch, score, possibleScore, save }) {
+export default function QuizFinished({ dispatch, score, possibleScore, save, saveToRemote }) {
   const navigate = useNavigate()
   return (
     <div className="mx-auto text-center">
@@ -16,6 +16,7 @@ export default function QuizFinished({ dispatch, score, possibleScore, save }) {
         className="underline"
         onClick={() => {
           save()
+          saveToRemote()
           navigate(`/app/home`, { replace: true })
           dispatch({ type: 'reStart' })
         }}

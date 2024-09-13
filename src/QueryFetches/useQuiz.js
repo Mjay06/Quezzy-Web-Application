@@ -11,12 +11,14 @@ import {
   SearchQuiz,
   SendQuestion,
   SendQuiz,
+  SendResult,
 } from '../Apis/QuizApi'
+import { GetUser } from '../Apis/UserAuthentication'
 
-export function useQuizData() {
+export function useQuizData(userId) {
   const { data, status, error } = useQuery({
-    queryKey: ['QuizData'],
-    queryFn: GetQuiz,
+    queryKey: ['QuizData', userId],
+    queryFn: () => GetQuiz(userId),
   })
   return { data, status, error }
 }
@@ -28,6 +30,14 @@ export function getUserQuestion(id) {
   })
   return { data, isLoading, error }
 }
+export function GetUserData() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['userData'],
+    queryFn: GetUser,
+  })
+  return { data, isLoading, error }
+}
+
 export function getQuizDescription(dispatch, navigate, state) {
   const mutation = useMutation({
     mutationFn: SearchQuiz,
@@ -91,4 +101,11 @@ export function useSearchQuiz(quizcode, enabled) {
     enabled: enabled,
   })
   return { data, isLoading, error }
+}
+
+export function useSendResult() {
+  const mutation = useMutation({
+    mutationFn: SendResult,
+  })
+  return mutation
 }

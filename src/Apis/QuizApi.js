@@ -1,6 +1,9 @@
 import supabase from './Supabase'
-export async function GetQuiz() {
-  let { data: Quizzes, error } = await supabase.from('Quizzes').select('*')
+export async function GetQuiz(userId) {
+  let { data: Quizzes, error } = await supabase
+    .from('Quizzes')
+    .select('*')
+    .eq('userId', userId)
   if (error) throw new Error(error.message)
   return { Quizzes, error }
 }
@@ -11,6 +14,13 @@ export async function SendQuiz(QuizData) {
     .select()
 
   if (error) throw new Error(error.message)
+}
+export async function SendResult(ResultData) {
+  console.log(ResultData)
+  const { data, error } = await supabase
+    .from('Results')
+    .insert(ResultData)
+    .select()
 }
 export async function SendQuestion(QuestionData) {
   const { data, error } = await supabase
@@ -28,6 +38,16 @@ export async function GetQuizQuestion(Id) {
     .eq('Title', Id)
 
   if (error) throw new Error(error.message)
+  return { data, error }
+}
+export async function GetQuizResult(Id) {
+  const { data, error } = await supabase
+    .from('Results')
+    .select('*')
+    .eq('quizId', Id)
+
+  if (error) throw new Error(error.message)
+    console.log(data)
   return { data, error }
 }
 

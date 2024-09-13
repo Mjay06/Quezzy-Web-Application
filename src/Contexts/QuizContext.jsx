@@ -41,7 +41,7 @@ function reducer(state, action) {
             B: action.payload.B,
             C: action.payload.C,
             D: action.payload.D,
-            Question: action.payload.question
+            Question: action.payload.question,
           },
           state.No
         ),
@@ -54,8 +54,19 @@ function reducer(state, action) {
         No: state.No - 1,
       }
     case 'TimesUp':
-      return{
-        ...state
+      const resultTime = {
+        ...state,
+      }
+      let number = 0
+      resultTime.QuizData.forEach((score) => {
+        if (score.userAnswer === score.CorrectAnswer) {
+          number = number + Number(action.payload.point)
+        }
+      })
+      return {
+        ...state,
+        status: 'finished',
+        Score: number,
       }
     case 'Submit':
       const result = {

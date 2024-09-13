@@ -4,7 +4,8 @@ import { GetQuestion, GetQuizQuestion } from '../Apis/QuizApi'
 import QuizQuestionCard from './QuizQuestionCard'
 import { takeQuizQuestion } from '../Contexts/QuizContext'
 import QuizFinished from './QuizFinished'
-import Timer from  './Timer'
+import Timer from './Timer'
+import { useSendResult } from '../QueryFetches/useQuiz'
 
 export default function QuizInfo({ Time, Title, Description, ppq, Id }) {
   const [name, setName] = useState(null)
@@ -12,13 +13,14 @@ export default function QuizInfo({ Time, Title, Description, ppq, Id }) {
   const [number, setNumber] = useState(0)
   const [selectedOption, setSelectedOption] = useState('')
   const { dispatch, state } = takeQuizQuestion()
+  const mutation = useSendResult()
   const { data, error, isLoading } = useQuery({
     queryKey: ['questions', Id],
     queryFn: () => GetQuestion(Number(Id)),
   })
   const prevExcept = number === 0
   const nextExcept = number + 1 === data?.length
-  
+
   function OnSubmit() {
     if (name) {
       setQuestion(true)
@@ -81,7 +83,14 @@ export default function QuizInfo({ Time, Title, Description, ppq, Id }) {
             Question {number + 1}
           </h1>
           <p>
-            15:00
+            <Timer
+              start={question}
+              startMinutes={Number(1)}
+              onSubmit={() => {
+                console.log('ran')
+                dispatch({ type: 'TimesUp' })
+              }}
+            />
           </p>
         </div>
         <QuizQuestionCard
@@ -107,6 +116,11 @@ export default function QuizInfo({ Time, Title, Description, ppq, Id }) {
     function save() {
       saveToLocalStorage('QuizScore', state)
     }
+    console.log(state)
+    function saveToRemote() {
+      const Result = { Name: state.name, Score: state.Score, quizId: Id }
+      mutation.mutate(Result)
+    }
 
     return (
       <QuizFinished
@@ -114,6 +128,7 @@ export default function QuizInfo({ Time, Title, Description, ppq, Id }) {
         score={state.Score}
         possibleScore={ppq * data.length}
         save={save}
+        saveToRemote = {saveToRemote}
       />
     )
   }

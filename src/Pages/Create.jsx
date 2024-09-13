@@ -6,14 +6,17 @@ import { useQuizData } from '../QueryFetches/useQuiz'
 import { Link } from 'react-router-dom'
 import { DeleteQuizWithQUestions } from '../Apis/QuizApi'
 import { useQueryClient } from '@tanstack/react-query'
+import { useUserData } from '../Contexts/UserDataContext'
 
 export default function Create() {
   //for form
   const queryClient = useQueryClient()
   const [form, setShowform] = useState(false)
+  const { state } = useUserData()
+  const userId = state.UserData.user.identities[0].user_id
 
   //to get the quiz data
-  const { data, status, eror } = useQuizData()
+  const { data, status, eror } = useQuizData(userId)
 
   if (status === 'success') {
     console.log(data.Quizzes)

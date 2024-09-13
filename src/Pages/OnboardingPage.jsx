@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { LoginWithGoogle } from '../Apis/UserAuthentication'
 
 export default function OnboardingPage() {
   return (
@@ -18,9 +19,16 @@ export default function OnboardingPage() {
           <img className="hp-img" src="./src/assets/illustration.svg" />
         </div>
       </div>
-      <Link to="/app">
-        <button className="hp-button text-center flex justify-center"> SIgn In With Google</button>
-      </Link>
+
+      <button
+        onClick={() => {
+          LoginWithGoogle()
+        }}
+        className="hp-button text-center flex justify-center"
+      >
+        {' '}
+        SIgn In With Google
+      </button>
     </div>
   )
 }

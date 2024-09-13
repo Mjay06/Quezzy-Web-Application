@@ -2,10 +2,13 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { EditQuizData } from '../QueryFetches/useQuiz'
 import { useQueryClient } from '@tanstack/react-query'
+import { useUserData } from '../Contexts/UserDataContext'
 
 export default function ({ setForm }) {
   const queryClient = useQueryClient()
   const mutation = EditQuizData(setForm, queryClient)
+  const { state } = useUserData()
+  const userId = state.UserData.user.identities[0].user_id
   const {
     register,
     handleSubmit,
@@ -13,8 +16,9 @@ export default function ({ setForm }) {
     formState: { errors },
   } = useForm()
   const onSubmit = (data) => {
-    console.log("successful")
-    mutation.mutate(data)
+    console.log('successful')
+    const SendQuiz = {...data, userId: userId  }
+    mutation.mutate(SendQuiz)
     mutation.isSuccess && setForm(false)
   }
   return (
@@ -78,7 +82,7 @@ export default function ({ setForm }) {
         </div>
         <input
           type="submit"
-          value={mutation.isLoading ? "Creating" : "Create"}
+          value={mutation.isLoading ? 'Creating' : 'Create'}
           className="w-full mx-auto text-center p-4 bg-purple font-Lato font-semibold text-base rounded-lg text-white"
         />
       </div>
