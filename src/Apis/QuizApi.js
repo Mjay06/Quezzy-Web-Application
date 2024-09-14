@@ -77,6 +77,10 @@ export async function DeleteQuizWithQUestions(id) {
     .from('Questions')
     .delete()
     .eq('quizId', id)
+    const { error: ResultError } = await supabase
+    .from('Results')
+    .delete()
+    .eq('quizId', id)
 }
 
 export async function SearchQuiz(quizCode) {

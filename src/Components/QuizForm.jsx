@@ -26,7 +26,7 @@ export default function ({ setForm }) {
       onSubmit={handleSubmit(onSubmit)}
       className="fixed inset-0 w-full h-full flex items-center justify-center"
     >
-      <div className=" mx-auto bg-white px-5 py-5 sm:w-full md:w-3/5 h-fit rounded-lg place-items-center">
+      <div className=" mx-auto bg-white px-5 py-5 w-full lg:w-3/5 md:w-3/5 h-fit rounded-lg place-items-center">
         <p onClick={() => setForm((form) => !form)} className="text-right">
           ✖️
         </p>
@@ -53,19 +53,19 @@ export default function ({ setForm }) {
             type="text"
             placeholder="Unique Quiz Code"
           ></input>
-          <div className="flex gap-2">
-            <span className=" w-full p-4 ring-0 outline-none bg-purple-100 rounded-lg font-Lato font-light text-sm mb-2">
+          <div className="flex gap-1">
+            <span className=" w-1/2 p-4 ring-0 outline-none bg-purple-100 rounded-lg font-Lato font-light text-sm mb-2">
               <input
-                className="w-fit  bg-purple-100 outline-none ring-0"
+                className="w-fit lg:text-sm md:text-sm text-xs  bg-purple-100 outline-none ring-0"
                 {...register('Time', { required: true })}
                 type="text"
                 placeholder="Time duration"
               ></input>{' '}
               :Mins{' '}
             </span>
-            <span className=" w-full p-4 ring-0 outline-none bg-purple-100 rounded-lg font-Lato font-light text-sm mb-2">
+            <span className=" w-1/2 p-4 ring-0 outline-none bg-purple-100 rounded-lg font-Lato font-light text-sm mb-2">
               <input
-                className="w-fit  bg-purple-100 outline-none ring-0"
+                className="w-fit text-xs md:text-sm lg:text-sm  bg-purple-100 outline-none ring-0"
                 {...register('ppq', { required: true })}
                 type="text"
                 placeholder="Points Per Question"

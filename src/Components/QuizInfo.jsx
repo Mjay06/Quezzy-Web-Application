@@ -85,7 +85,7 @@ export default function QuizInfo({ Time, Title, Description, ppq, Id }) {
           <p>
             <Timer
               start={question}
-              startMinutes={Number(1)}
+              startMinutes={Number(Time)}
               onSubmit={() => {
                 console.log('ran')
                 dispatch({ type: 'TimesUp' })

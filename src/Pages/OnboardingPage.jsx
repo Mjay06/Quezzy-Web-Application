@@ -5,7 +5,7 @@ import { LoginWithGoogle } from '../Apis/UserAuthentication'
 export default function OnboardingPage() {
   return (
     <div className="hp">
-      <img className="hp-logo" src="./src/assets/logo.svg" />
+      <img className="hp-logo" src="/logo.svg" />
       <h1 className="hp-h1">Unleash your knowledge</h1>
       <p className="hp-p">#Challengeyourlimits</p>
 
@@ -16,7 +16,7 @@ export default function OnboardingPage() {
           limits.
         </p>
         <div className="hp-imgbox">
-          <img className="hp-img" src="./src/assets/illustration.svg" />
+          <img className="hp-img" src="/illustration.svg" />
         </div>
       </div>
 

@@ -30,10 +30,11 @@ export default function Create() {
       {!form && (
         <img
           onClick={() => setShowform((form) => !form)}
-          className="bg-white rounded-full p-2 absolute bottom-20 right-10"
-          src="../src/assets/addIcon.svg"
+          className="bg-white rounded-full p-2 absolute bottom-20 right-10 shadow-md"
+          src="/addIcon.svg"
         />
       )}
+      <div className='h-[80vh] shadow-md overflow-scroll'>
       {status === 'success' && data.Quizzes.length >= 1
         ? data.Quizzes.map((quiz) => (
             <QuizCard
@@ -48,7 +49,7 @@ export default function Create() {
             />
           ))
         : ''}
-
+       </div>
       {form && <QuizForm setForm={setShowform} />}
     </div>
   )

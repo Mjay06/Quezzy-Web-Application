@@ -11,7 +11,7 @@ export default function QuizFinished({ dispatch, score, possibleScore, save, sav
       <h3 className="text-purple mt-12 mb-7 font-Montserrat text-md font-semibold text-center">
         Score: <br /> {score} / {possibleScore} <br /> pts
       </h3>
-      <img className="mx-auto" src="../src/assets/cup.svg" />
+      <img className="mx-auto" src="/cup.svg" />
       <button
         className="underline"
         onClick={() => {

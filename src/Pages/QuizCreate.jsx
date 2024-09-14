@@ -15,9 +15,9 @@ export default function QuizCreate() {
   const { data, error, isLoading } = useQuery({
     queryKey: ['questions', id],
     queryFn: () => GetQuestion(Number(id)),
-    onSuccess: (data) =>{
-      console.log("dataLoaded")
-    }
+    onSuccess: (data) => {
+      console.log('dataLoaded')
+    },
   })
 
   if (isLoading === true) return <div>Loading...</div>
@@ -36,27 +36,29 @@ export default function QuizCreate() {
           <img
             onClick={() => setForm((form) => !form)}
             className="bg-white rounded-full p-1"
-            src="/src/assets/addIcon.svg"
+            src="/addIcon.svg"
           />
         )}
       </div>
       {form && <QuestionForm id={id} setForm={setForm} />}
-      {!isLoading &&
-        data.map((question) => {
-          no++
-          return (
-            <QuizQuestion
-              No={no}
-              A={question.A}
-              B={question.B}
-              C={question.C}
-              D={question.D}
-              Answer={question.answer}
-              Question={question.Question}
-              id={question.id}
-            />
-          )
-        })}
+      <div className="h-[67vh] shadow-md overflow-scroll">
+        {!isLoading &&
+          data.map((question) => {
+            no++
+            return (
+              <QuizQuestion
+                No={no}
+                A={question.A}
+                B={question.B}
+                C={question.C}
+                D={question.D}
+                Answer={question.answer}
+                Question={question.Question}
+                id={question.id}
+              />
+            )
+          })}
+      </div>
     </div>
   )
 }

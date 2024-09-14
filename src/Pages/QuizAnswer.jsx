@@ -16,8 +16,10 @@ export default function QuizAnswer() {
   })
   console.log
   if (isLoading) return <p>Loading</p>
-
-  if (data)
+  if (data.data.length === 0){
+    return (<div>Sorry no one has taken your quiz yet</div>)
+  }
+  if (data.data.length > 0)
     return (
       <div>
         {data.data.map((datum) => (

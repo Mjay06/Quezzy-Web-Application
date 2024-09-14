@@ -6,8 +6,8 @@ export default function AppLayout() {
   return (
     <div className='p-6'>
       <div className='flex justify-between mt-10'>
-        <NavLink to={"home"}><img className='bg-white p-3 rounded-full' src="/src/assets/homeicon.svg" /></NavLink>
-        <img src="/src/assets/logo.svg" />
+        <NavLink to={"home"}><img className='bg-white p-3 rounded-full' src="/homeicon.svg" /></NavLink>
+        <img src="/logo.svg" />
       </div>
       <Outlet />
     </div>

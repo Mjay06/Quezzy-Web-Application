@@ -43,7 +43,7 @@ export default function Home() {
           description={
             'Easily create custom quizzes with various question types and time limits.'
           }
-          image={'../src/assets/createQuizIcon.svg'}
+          image={'/createQuizIcon.svg'}
           to={'/app/create'}
         />
 
@@ -51,12 +51,12 @@ export default function Home() {
           type={'Expand'}
           Title={'Take a friends quiz'}
           description={'Get tested by your friend on any topic of their choice'}
-          image={'../src/assets/FriendsQuiz.svg'}
+          image={'/FriendsQuiz.svg'}
         />
         <Explore
           Title={'View Score'}
           description={'See your scores and track your progress.'}
-          image={'../src/assets/score.svg'}
+          image={'/score.svg'}
           to={'/app/scores'}
         />
       </div>
