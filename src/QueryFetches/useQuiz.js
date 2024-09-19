@@ -7,6 +7,7 @@ import {
 import {
   DeleteQuestion,
   DeleteQuizWithQUestions,
+  editQuiz,
   GetQuiz,
   SearchQuiz,
   SendQuestion,
@@ -108,4 +109,18 @@ export function useSendResult() {
     mutationFn: SendResult,
   })
   return mutation
+}
+
+export function editquizApi(queryClient) {
+  const { mutate: edit } = useMutation({
+    mutationFn: ({id, data}) => editQuiz(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['QuizData'])
+    },
+    onError: (error) => {
+      console.log(error)
+    }
+  })
+
+  return edit
 }

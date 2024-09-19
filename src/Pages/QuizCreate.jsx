@@ -9,6 +9,8 @@ import QuestionForm from '../Components/QuestionForm'
 
 export default function QuizCreate() {
   const [form, setForm] = useState(false)
+  const [editForm, setEditForm] = useState(false)
+  const [editData, setEditData] = useState("")
   const { id, title } = useParams()
   let no = 0
   console.log(id)
@@ -40,7 +42,8 @@ export default function QuizCreate() {
           />
         )}
       </div>
-      {form && <QuestionForm id={id} setForm={setForm} />}
+      {form && <QuestionForm id={id}  setForm={setForm} />}
+      {editForm && <QuestionForm editData={editData} id={id} type={"edit"} setForm={setEditForm} />}
       <div className="h-[67vh] shadow-md overflow-scroll">
         {!isLoading &&
           data.map((question) => {
@@ -55,6 +58,9 @@ export default function QuizCreate() {
                 Answer={question.answer}
                 Question={question.Question}
                 id={question.id}
+                quizId={id}
+                setForm={setEditForm}
+                setEditData= {setEditData}
               />
             )
           })}

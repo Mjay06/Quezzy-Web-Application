@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { DeleteQuestion } from '../Apis/QuizApi'
 import { deleteQuiz } from '../QueryFetches/useQuiz'
 import { useQueryClient } from '@tanstack/react-query'
@@ -12,11 +12,14 @@ export default function QuizQuestion({
   Answer,
   Question,
   id,
+  quizId,
   type = undefined,
+  setForm,
+  setEditData,
 }) {
   const queryClient = useQueryClient()
 
-  function invalidatequery(){
+  function invalidatequery() {
     queryClient.invalidateQueries(['questions', id])
   }
   const mutation = deleteQuiz(invalidatequery)
@@ -36,12 +39,23 @@ export default function QuizQuestion({
         <p>Answer: {Answer}</p>
         <div className="flex gap-2 justify-end font-bold">
           {type || (
-            <span
-              onClick={() => mutation.mutate(id)}
-              className="text-xs text-red-500 cursor-pointer"
-            >
-              Delete
-            </span>
+            <>
+              <span
+                onClick={() => {
+                  setForm(true)
+                  setEditData({ A, B, C, D, answer:Answer, Question, id, quizId })
+                }}
+                className="text-xs text-black-500 cursor-pointer"
+              >
+                Edit
+              </span>
+              <span
+                onClick={() => mutation.mutate(id)}
+                className="text-xs text-red-500 cursor-pointer"
+              >
+                Delete
+              </span>
+            </>
           )}
         </div>
       </div>

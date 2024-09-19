@@ -47,7 +47,7 @@ export async function GetQuizResult(Id) {
     .eq('quizId', Id)
 
   if (error) throw new Error(error.message)
-    console.log(data)
+  console.log(data)
   return { data, error }
 }
 
@@ -77,7 +77,7 @@ export async function DeleteQuizWithQUestions(id) {
     .from('Questions')
     .delete()
     .eq('quizId', id)
-    const { error: ResultError } = await supabase
+  const { error: ResultError } = await supabase
     .from('Results')
     .delete()
     .eq('quizId', id)
@@ -93,4 +93,18 @@ export async function SearchQuiz(quizCode) {
   }
   console.log(Quizzes)
   return Quizzes
+}
+
+export async function editQuiz(id, quizadata) {
+  console.log(id, quizadata)
+  const { data, error } = await supabase
+    .from('Questions')
+    .update(quizadata)
+    .eq('id', id)
+    .select()
+
+   if (error){
+    console.log(error)
+   }
+   return data
 }
